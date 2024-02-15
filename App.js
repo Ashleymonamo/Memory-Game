@@ -1,5 +1,14 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, Modal, TextInput, Button } from 'react-native';
+
+
+const Card = ({ card, onPress }) => {
+  return (
+    <TouchableOpacity style={styles.card} onPress={onPress}>
+      <Text style={styles.cardText}>{card.isFaceUp ? card.value : 'X'}</Text>
+    </TouchableOpacity>
+  );
+};
 
 export default function App() {
   return (
