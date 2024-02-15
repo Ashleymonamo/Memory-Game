@@ -88,9 +88,45 @@ export default function App() {
   };
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    {/* Modal for entering player names */}
+    <Modal
+      animationType="slide"
+      transparent={true}
+      visible={modalVisible}
+      onRequestClose={() => {
+        Alert.alert('Modal has been closed.');
+        setModalVisible(!modalVisible);
+      }}
+    >
+      <View style={styles.modalView}>
+        <Text style={styles.modalText}>Enter Player Names</Text>
+        <TextInput
+          style={styles.input}
+          placeholder="Player 1"
+          onChangeText={setPlayer1Name}
+          value={player1Name}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Player 2"
+          onChangeText={setPlayer2Name}
+          value={player2Name}
+        />
+        <Button title="Start Game" onPress={handleStartGame} />
+      </View>
+    </Modal>
+     {/* Display players' scores */}
+    {players.map((player, index) => (
+      <Text key={index} style={styles.scoreText}>{player.name}'s Score: {player.score}</Text>
+    ))}
+      {/* Container for displaying cards */}
+    <View style={styles.cardsContainer}>
+       {/* Render cards */}
+      {cards.map((card, index) => (
+        <Card key={index} card={card} onPress={() => handleCardPress(index)} />
+      ))}
     </View>
+  </View>
   );
 }
 
